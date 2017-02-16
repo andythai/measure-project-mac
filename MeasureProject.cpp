@@ -503,6 +503,7 @@ static void prompt_new() {
 			loop = false;
 			REPEAT = true;
 			LOCATION = 0;
+            IS_ZOOM = false;
 			cout << endl;
 		}
 		else if (response == "n" || response == "N") {
