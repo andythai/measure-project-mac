@@ -18,6 +18,7 @@ const string OUTPUT_CONSTANT = "output/";	// Output folder string
 vector<Coordinates*> POINTS;				// Pixel coordinates
 vector<Mat*> IMAGES;						// Vector of images for gfx, used for full resolution tagging. Backend, drawn on, but not displayed
 int LOCATION = 0;							// Iteration index
+double IMG_SCALE = 0.64;
 int X_POS = -1;								// Mouse position for x
 int Y_POS = -1;								// Mouse position for y
 const int ZOOM_SCALE = 200;					// Scale to zoom in
@@ -149,6 +150,9 @@ static void load_image() {
 		}
 	}
 	
+    resize(image, image, Size(), IMG_SCALE, IMG_SCALE); // Fit to screen
+    //image.resize(Size(1400,1080));
+    
 	// Sets image vector
 	for (int i = 0; i < 8; i++) {
 		image.copyTo(*IMAGES[i]);
