@@ -483,19 +483,19 @@ static void save() {
 	cout << "Angle: " << angle << " degrees" << endl << endl;
 
 	// Save into data log
-	string output = OUTPUT_CONSTANT + IMAGE_DIRECTORY.substr(0, IMAGE_DIRECTORY.find(".")) + ".txt";
+	string output = OUTPUT_CONSTANT + IMAGE_DIRECTORY.substr(0, IMAGE_DIRECTORY.find(".")) + ".csv";
 	ofstream output_file;
 	output_file.open(output, ios::out | ios::binary | ios::trunc);
-	output_file << IMAGE_DIRECTORY << endl << endl;
-	output_file << "Rat eye ratio (height/width): " << height_width_ratio << endl;
-	output_file << "\tHeight point 1: (" << h_x1 << ", " << h_y1 << ")" << endl;
-	output_file << "\tHeight point 2: (" << h_x2 << ", " << h_y2 << ")" << endl;
-	output_file << "\tWidth point 1: (" << w_x1 << ", " << w_y1 << ")" << endl;
-	output_file << "\tWidth point 2: (" << w_x2 << ", " << w_y2 << ")" << endl << endl;
-	output_file << "Rat face angle: " << angle << " degrees" << endl;
-	output_file << "\tAnchor 1: (" << anchor1_x << ", " << anchor1_y << ")" << endl;
-	output_file << "\tAnchor 2: (" << anchor2_x << ", " << anchor2_y << ")" << endl;
-	output_file << "\tAnchor 3: (" << anchor3_x << ", " << anchor3_y << ")" << endl;
+	output_file << IMAGE_DIRECTORY << ",," << endl;
+	output_file << "ratio," << height_width_ratio << "," << endl;
+	output_file << "heightpoint1," << h_x1 << "," << h_y1 << endl;
+	output_file << "heightpoint2," << h_x2 << "," << h_y2 << endl;
+	output_file << "widthpoint1," << w_x1 << "," << w_y1 << endl;
+	output_file << "widthpoint2," << w_x2 << "," << w_y2 << endl;
+	output_file << "angle," << angle << "," << endl;
+	output_file << "angleanchor1," << anchor1_x << "," << anchor1_y << endl;
+	output_file << "angleanchor2," << anchor2_x << "," << anchor2_y << endl;
+	output_file << "angleanchor3," << anchor3_x << "," << anchor3_y << endl;
 	output_file.close();
 }
 
