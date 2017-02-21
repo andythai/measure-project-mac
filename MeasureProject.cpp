@@ -161,12 +161,16 @@ static void load_image() {
 
 // Prints controls for the program
 static void print_controls() {
-	cout << "\nClick on the left, right, top, and bottom corners of the rat's eye (respectively for width and height)." << endl;
-	cout << "Then select three anchor points, the first, middle point, then end point." << endl << endl;
-	cout << "CONTROLS:" << endl;
-	cout << "\tLeft click to select parts (7 total)." << endl;
+	
+	cout << endl << "CONTROLS:" << endl;
+    cout << "\nClick on the left, right, top, and bottom corners of the rat's eye (respectively for width and height)." << endl;
+    cout << "Then select three anchor points, the first, middle point, then end point." << endl << endl;
+    cout << "\tLeft click to select parts (7 total)." << endl << endl;
+    cout << "\tSelect two points for the horizontal (width)" << endl << "\tdistance for the rat's eye. This is represented in green points." << endl << endl;
+    cout << "\tThen, select two points for the vertical (height)" << endl << "\tdistance for the rat's eye. This is represented in blue points." << endl << endl;
+    cout << "\tFinally, select three anchor points as the angle to be calculated" << endl << "\tThis is represented in red points." << endl << "\t(First, middle, and last point in order)" << endl << endl;
 	cout << "\tOnce all parts are selected, press x/X to exit." << endl;
-	cout << "\tIf you make a mistake, press u/U to undo your action." << endl << endl;
+	cout << "\tIf you make a mistake, press u/U to UNDO your action." << endl << endl;
 }
 
 // Shows image
