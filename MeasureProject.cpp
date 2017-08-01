@@ -28,6 +28,19 @@ int ZOOM_RECT_X = -1;						// x,y coordinates of zoomed in box
 int ZOOM_RECT_Y = -1;
 const double PI = 3.141592653589793238463;	// Pi constant
 
+int el_width_x1 = 0;
+int el_width_y1 = 0;
+int el_width_x2 = 0;
+int el_width_y2 = 0;
+
+int el_height_x1 = 0;
+int el_height_y1 = 0;
+int el_height_x2 = 0;
+int el_height_y2 = 0;
+
+double el_center_x = 0;
+double el_center_y = 0;
+
 // Forward declarations
 static void setup_vector();
 static void check_directories();
@@ -231,6 +244,10 @@ void mouse_callback(int event, int x, int y, int flags, void* userdata)
 			// Left side
 			if (LOCATION == 0) {
 				cout << "Width side 1 of rat eye selected at (" << x << ", " << y << ")" << endl;
+                
+                el_width_x1 = x;
+                el_width_y1 = y;
+                
 				POINTS[LOCATION]->set_coords(x, y);
 				IMAGES[LOCATION]->copyTo(*IMAGES[LOCATION + 1]);
 				LOCATION++;
@@ -248,6 +265,10 @@ void mouse_callback(int event, int x, int y, int flags, void* userdata)
 			// Right side
 			else if (LOCATION == 1) {
 				cout << "Width side 2 of rat eye selected at (" << x << ", " << y << ")" << endl;
+                
+                el_width_x2 = x;
+                el_width_y2 = y;
+                
 				POINTS[LOCATION]->set_coords(x, y);
 				IMAGES[LOCATION]->copyTo(*IMAGES[LOCATION + 1]);
 				LOCATION++;
@@ -272,6 +293,10 @@ void mouse_callback(int event, int x, int y, int flags, void* userdata)
 			// Top side
 			if (LOCATION == 2) {
 				cout << "Height side 1 of rat eye selected at (" << x << ", " << y << ")" << endl;
+                
+                el_height_x1 = x;
+                el_height_y1 = y;
+                
 				POINTS[LOCATION]->set_coords(x, y);
 				IMAGES[LOCATION]->copyTo(*IMAGES[LOCATION + 1]);
 				LOCATION++;
@@ -289,11 +314,24 @@ void mouse_callback(int event, int x, int y, int flags, void* userdata)
 			// Bottom side
 			else if (LOCATION == 3) {
 				cout << "Height side 2 of rat eye selected at (" << x << ", " << y << ")" << endl;
+                
+                el_height_x2 = x;
+                el_height_y2 = y;
+                
+                el_center_x = (el_width_x1 + el_width_x2) / 2.0;
+                el_center_y = (el_height_y1 + el_height_y2) / 2.0;
+                
+                double el_center_size_x = abs(el_width_x2 - el_width_x1);
+                double el_center_size_y = abs(el_height_y2 - el_height_y1);
+                
 				POINTS[LOCATION]->set_coords(x, y);
 				IMAGES[LOCATION]->copyTo(*IMAGES[LOCATION + 1]);
 				LOCATION++;
 				circle(*IMAGES[LOCATION], Point(x, y), 2, Scalar(255, 0, 0, 1), -1);
 				line(*IMAGES[LOCATION], Point(POINTS[LOCATION - 2]->get_x(), POINTS[LOCATION - 2]->get_y()), Point(x, y), Scalar(255, 0, 0, 1), 1);
+                
+                ellipse(*IMAGES[LOCATION], Point(el_center_x, el_center_y), Size(el_center_size_x / 2.0, el_center_size_y / 2.0), 0, 0, 360, Scalar(255,0,255), 1.5);
+                
 				IMAGES[LOCATION]->copyTo(*TEMP);
 				if (IS_ZOOM) {
 					zoom(ZOOM_TEMP_X, ZOOM_TEMP_Y);
